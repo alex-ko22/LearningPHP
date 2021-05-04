@@ -14,7 +14,7 @@
   
    <div class="container my-5">
       <div class="col-sm-4 mx-auto">
-        <form action="php1/handlerReg.php" method="POST">
+        <form action="php/handlerReg.php" method="POST">
           <div class="mb-3">
             <input name="name" type="text" class="form-control" placeholder="name">
           </div>
