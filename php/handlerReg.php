@@ -8,7 +8,7 @@
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
     $pass = $_POST['pass'];
-    
+
     $email = mb_strtolower($email);
     $pass = password_hash($pass,PASSWORD_DEFAULT);
     
