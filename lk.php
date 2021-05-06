@@ -31,40 +31,57 @@
       .save-btn:active{
         color:DarkGreen;
       }
+
+      .cancel-btn{
+        color:red;
+        cursor: pointer;
+      }
+      .cancel-btn:hover{
+        color:LightRed;
+      }
+      .cancel-btn:active{
+        color:DarkRed;
+      }
     </style>
   </head>
   <body>
       
     
     <div class="container py-5">
+      <h1 class="text-center mb-3">Личный кабинет</h1>
       <p>
         Имя: <span><?php echo $_SESSION['name'] ?></span> 
         <span class="edit-btn">[редактировать]</span>
         <span class="save-btn" hidden data-item="name">[сохранить]</span>
-        <span class="cancel-btn" hidden>[отменить]</span>
+        <span class="cancel-btn" hidden >[отменить]</span>
       </p>
       <p>
         Фамилия: <span><?php echo $_SESSION['lastname'] ?></span>
         <span class="edit-btn">[редактировать]</span>
         <span class="save-btn" hidden data-item="lastname">[сохранить]</span>
-        <span class="cancel-btn" hidden>[отменить]</span>
+        <span class="cancel-btn" hidden >[отменить]</span>
       </p>
       <p>E-mail: <?php echo $_SESSION['email'] ?></p>
     </div>
     
     <script>
+     
       const editBtns = document.querySelectorAll('.edit-btn');
       const saveBtns = document.querySelectorAll('.save-btn');
       const cancelBtns = document.querySelectorAll('.cancel-btn');
+
       for(let i=0; i<editBtns.length; i++){
         const editBtn = editBtns[i];
         const saveBtn = saveBtns[i];
         const cancelBtn = cancelBtns[i];
+        const originalValue = editBtn.previousElementSibling.innerText;
+
         editBtn.addEventListener("click", ()=>{
           let value = editBtn.previousElementSibling.innerText;
           editBtn.previousElementSibling.innerHTML = `<input type="text" value="${value}">`;
           editBtn.hidden = true; // Скрываем кнопку [редактировать]
           saveBtn.hidden = false; // Показываем кнопку [сохранить]
+          cancelBtn.hidden = false;
         });
         saveBtn.addEventListener("click", ()=>{
           let value = editBtn.previousElementSibling.getElementsByTagName('input')[0].value;
@@ -72,7 +89,7 @@
           const formData = new FormData();
           formData.append('item',item);
           formData.append('value',value);
-          fetch("/php/handlerChange.php",{
+          fetch("php/handlerChange.php",{
             method:"POST",
             body:formData
           }).then(response=>response.text())
@@ -84,9 +101,11 @@
             });
         });
         cancelBtn.addEventListener("click", ()=>{
-
-            saveBtn.hidden = false;
-        })
+            editBtn.previousElementSibling.innerText = originalValue;
+            saveBtn.hidden = true;
+            cancelBtn.hidden = true;
+            editBtn.hidden = false;
+        });
       }
     </script>
     <!-- Вариант 1: Bootstrap в связке с Popper -->

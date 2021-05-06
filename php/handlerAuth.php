@@ -1,4 +1,3 @@
-
 <?php
 
     header('Content-type: text/html; charset=utf-8');
@@ -17,9 +16,7 @@
         $_SESSION['lastname'] = $row['lastname'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['id'] = $row['id'];
-        echo "success";
-        
+        echo ("success");
     }    
-    else  echo "error";
-
+    else  echo ("error");
 ?>

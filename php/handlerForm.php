@@ -1,15 +1,13 @@
 <?php
-
     header('Content-type: text/html; charset=utf-8');
     
-    $firstname = $_POST['firstname'];
-    $surname = $_POST['surname'];
+    $name = $_POST['name'];
+    $lastname = $_POST['lastname'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
+    $msg = $_POST['msg'];
     
-    echo("first name: $firstname\n");
-    echo("surname: $surname\n");
-    echo("phone: $phone\n");
-    echo("email: $email");
-    
+    $message = "Имя: $name\nФамилия: $lastname\nТелефон: $phone\nПочта: $email\nСообщение: $msg";
+   // mail("sash1122@yandex.ru","Письмо с сайта",$message);
+    echo ("success");
 ?>

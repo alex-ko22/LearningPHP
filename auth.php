@@ -34,7 +34,7 @@
       function sendForm(form){
         info.innerText = '';
         const formData = new FormData(form);
-        fetch("/php/handlerAuth.php",{
+        fetch("php/handlerAuth.php",{
           method: "POST",
           body: formData
         }).then(response=>response.text())
