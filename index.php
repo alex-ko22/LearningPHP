@@ -1,36 +1,38 @@
-<!doctype html>
-<html lang="ru">
-  <head>
-    <!-- Обязательные метатеги -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php require_once('header.php'); ?>
+<div class="container my-5">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Заголовок</th>
+        <th scope="col">Автор</th>
+        <th scope="col">Дата добавления</th>
+        <th scope="col">Управление</th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+      
+    </tbody>
+  </table>
+</div>
+<script>
+  const tbody = document.getElementById("tbody");
+  fetch('php/getPosts.php')
+    .then(response=>response.json())
+    .then(result=>{
+      for(let i=0; i<result.length; i++){
+        tbody.innerHTML += `
+            <tr>
+              <th scope="row">${i+1}</th>
+              <td><a href="getArticle.php?id=${result[i].id}">${result[i].title}</a></td>
+              <td>${result[i].author}</td>
+              <td>${result[i].add_date}</td>
+              <td><a href="updatePost.php?id=${result[i].id}" class="btn btn-primary">редактировать</a><br>
+                  <button class="btn btn-danger">удалить</button>
+              </td>
+            </tr>`;
+      }
+    });
+</script>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-
-    <title>Привет мир!</title>
-  </head>
-  <body>
-  
-   <div class="container my-5">
-      <div class="col-sm-4 mx-auto">
-        <form action="php/handlerForm.php" method="POST">
-          <div class="mb-3">
-            <input name="firstname" type="text" class="form-control" placeholder="Имя">
-          </div>
-          <div class="mb-3">
-            <input name="phone" type="text" class="form-control" placeholder="Телефон">
-          </div>
-          <div class="mb-3">
-            <textarea name="msg" class="form-control" placeholder="Сообщение"></textarea>
-          </div>
-          <div class="mb-3">
-            <input type="submit" class="form-control btn btn-primary">
-          </div>
-        </form>
-      </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-
-  </body>
-</html>
+<?php require_once('footer.php'); ?>

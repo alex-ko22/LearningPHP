@@ -19,19 +19,19 @@
         <form action="php/handlerForm.php" method="POST" onsubmit="sendForm(this); return false;">
           <span>Имя</span>
           <div class="mb-1">
-             <input name="name" type="text" class="form-control" placeholder="<?php echo $_SESSION['name']?>">
+             <input name="name" type="text" class="form-control" value="<?php echo $_SESSION['name']?>">
           </div>
           <span>Фамилия</span>
            <div class="mb-1">
-            <input name="lastname" type="text" class="form-control" placeholder="<?php echo $_SESSION['lastname']?>">
+            <input name="lastname" type="text" class="form-control" value="<?php echo $_SESSION['lastname']?>">
           </div>
           <span>Телефон</span>
           <div class="mb-1">
-            <input name="phone" type="tel" class="form-control" placeholder="+7">
+            <input name="phone" type="tel" class="form-control" value="+7">
           </div>
           <span>Почта</span>
           <div class="mb-1">
-            <input name="email" type="email" class="form-control" placeholder="<?php echo $_SESSION['email']?>">
+            <input name="email" type="email" class="form-control" value="<?php echo $_SESSION['email']?>">
           </div>
           <span>Сообщение</span>
           <div class="mb-3">
@@ -42,7 +42,7 @@
           </div>
         </form>
       </div>
-      <p id="info" style="color:green" hidden class="text-center">Ваше сообщение успешно отправлено!</p>
+      <p id="info" class="text-center"></p>
     </div>
     <script>
       let info = document.getElementById('info');
@@ -54,9 +54,14 @@
         }).then(response=>response.text())
           .then(result=>{
             if(result === 'success') {
-              info.hidden = false;
-              setTimeout(()=>{info.hidden = true},2000);
+              info.innerText = "Ваше сообщение отправлено";
+              info.style = "color:green";
             }
+            else {
+              info.innerText = "Ошибка при отправке";
+              info.style = "color:red";
+            }
+            setTimeout(()=>{info.innerText = ""},2000);
           });
 
       }

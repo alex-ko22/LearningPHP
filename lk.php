@@ -98,6 +98,7 @@
               editBtn.previousElementSibling.innerHTML = value;
               saveBtn.hidden = true;
               editBtn.hidden = false;
+              cancelBtn.hidden = true;
             });
         });
         cancelBtn.addEventListener("click", ()=>{

@@ -24,7 +24,7 @@
             <p id="info" style="color:red;"></p>
           </div>
           <div class="mb-3">
-            <input type="submit" class="form-control btn btn-primary" value="Enter">
+            <input type="submit" class="form-control btn btn-primary" value="Войти">
           </div>
         </form>
       </div>
