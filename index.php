@@ -28,11 +28,25 @@
               <td>${result[i].author}</td>
               <td>${result[i].add_date}</td>
               <td><a href="updatePost.php?id=${result[i].id}" class="btn btn-primary">редактировать</a><br>
-                  <button class="btn btn-danger">удалить</button>
+                  <button onclick = "delPost(${result[i].id})" class="btn btn-danger">удалить</button>
               </td>
             </tr>`;
       }
     });
+    function delPost(id) {
+    const formData = new FormData();
+    formData.append('id',id);
+      fetch("php/handlerDeletePost.php",{
+      method: "POST",
+      body: formData
+    }).then(response=>response.text())
+      .then(result=>{
+        if(result==='success'){
+          alert("Запись удалена!");
+          location.href='./';
+        }
+      });
+    }
 </script>
 
 <?php require_once('footer.php'); ?>
