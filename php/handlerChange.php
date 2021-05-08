@@ -1,7 +1,7 @@
 <?php
     header('Content-type: text/html; charset=utf-8');
     session_start();
-    $mysqli = new mysqli('localhost','root','','learning_php');
+    require_once("db.php");
     $item = $_POST['item']; // тут либо name либо lastname
     $value= $_POST['value'];
     $id = $_SESSION['id'];

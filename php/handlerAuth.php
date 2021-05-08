@@ -1,9 +1,7 @@
 <?php
-
     header('Content-type: text/html; charset=utf-8');
-
     session_start();
-    $mysqli = new mysqli('localhost','root','','learning_php');
+    require_once("db.php");
     
     $email = mb_strtolower($_POST['email']);
     $pass = $_POST['pass'];

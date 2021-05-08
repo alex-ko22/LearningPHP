@@ -1,8 +1,6 @@
 <?php
-
-    header('Content-type: text/html; charset=utf-8');
-    
-    $mysqli = new mysqli('localhost','root','','learning_php');
+    header('Content-type: text/html; charset=utf-8');  
+    require_once("db.php");
     
     $name = $_POST['name'];
     $lastname = $_POST['lastname'];
