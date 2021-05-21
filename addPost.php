@@ -23,7 +23,7 @@
 <script>
   function addPost(form){
     const formData = new FormData(form);
-    fetch("php/handlerAddPost.php",{
+    fetch("addPost",{
       method: "POST",
       body: formData
     }).then(response=>response.text())

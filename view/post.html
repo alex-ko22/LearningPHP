@@ -1,0 +1,33 @@
+    <!-- Post Content-->
+    <article>
+        <div class="container">
+            <div class="row">
+              <div class="col-lg-8 col-md-10 mx-auto">
+                 <h3 id='title'></h3>
+                 <p id='author'></p>
+                 <p id='content'></p>
+              </div>
+            </div>
+        </div>
+    </article>
+    <hr />
+
+    <script>
+      const title = document.getElementById("title");
+      const author= document.getElementById("author");
+      const content= document.getElementById("content");
+      
+      const formData = new FormData();
+      formData.append('id',location.pathname.split("/")[2]);
+      console.log(location.pathname);
+      fetch('/getPostById',{
+        method: "POST",
+        body: formData
+      }).then(response=>response.json())
+        .then(result=>{
+          console.log(result);
+          title.innerText = result.title;
+          author.innerText = 'Автор: ' + result.author;
+          content.innerHTML = result.content;
+        })
+    </script>

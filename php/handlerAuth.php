@@ -1,7 +1,9 @@
 <?php
+
     header('Content-type: text/html; charset=utf-8');
+
     session_start();
-    require_once("db.php");
+    $mysqli = new mysqli('localhost','alexko7a_l','r9d&%ylF','alexko7a_l');
     
     $email = mb_strtolower($_POST['email']);
     $pass = $_POST['pass'];
@@ -14,6 +16,7 @@
         $_SESSION['lastname'] = $row['lastname'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['id'] = $row['id'];
+        $_SESSION['foto'] = $row['foto'];
         echo ("success");
     }    
     else  echo ("error");

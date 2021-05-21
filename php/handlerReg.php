@@ -1,6 +1,8 @@
 <?php
-    header('Content-type: text/html; charset=utf-8');  
-    require_once("db.php");
+
+    header('Content-type: text/html; charset=utf-8');
+    
+    $mysqli = new mysqli('localhost','alexko7a_l','r9d&%ylF','alexko7a_l');
     
     $name = $_POST['name'];
     $lastname = $_POST['lastname'];

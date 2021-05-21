@@ -1,8 +1,14 @@
-<?php 
-
+<?php
   header('Content-type: text/html; charset=utf-8');
-
-  class Person {
+  /* В нашей вселенной у людей изначально 100ед. здоровья */
+  /* В нашей вселенной у людей не может быть больше 100ед. здоровья*/
+  /*
+    Создать дедушку по маминой линии
+    Создать бабушку по папиной линии
+    Создать дедушку по папиной линии
+    Доработать getInfo так, чтобы метод выводил всю информацию про бабушек и дедушек.
+  */
+  class Person{
     private $name;
     private $age;
     private $hp;
@@ -18,7 +24,6 @@
     }
     
     function getMother(){return $this->mother;}
-    function getFather(){return $this->father;}
     function getName(){return $this->name;}
     function sayHi($name){
       echo "Привет $name, меня зовут ".$this->name;
@@ -41,7 +46,7 @@
         }
       }
       if($this->father != null){
-        $info .= "Папу зовут ".$this->father->getName()."<br>";
+        $info .= "Папу зовут ".$this->father->getName();
         if($this->father->getFather() != null){
           $info .= "Дедушку  по папиной линии зовут ".$this->father->getFather()->getName()."<br>";
         }
@@ -53,13 +58,13 @@
     }
   }
   
-  $vasily = new Person("Василий",75,null,null);
-  $nina = new Person("Нина",70,null,null);
-  $lubov = new Person("Любовь",69,null,null);
-  $yuri = new Person("Юрий",68,null,null);
+  $vasily = new Person("Василий",75);
+  $nina = new Person("Нина",70);
+  $lubov = new Person("Любовь",69);
+  $yuri = new Person("Юрий",68);
   $oleg = new Person("Олег",34,$lubov,$yuri);
   $olga = new Person("Ольга",34,$nina,$vasily);
   $igor = new Person("Игорь",10,$olga,$oleg);
   
-  echo $igor->getInfo(); 
+  echo $olga->getInfo();
 ?>

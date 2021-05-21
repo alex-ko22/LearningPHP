@@ -30,7 +30,7 @@ require_once("header.php");?>
   function updatePost(form){
     const formData = new FormData(form);
     formData.append('id',<?= $id ?>);
-    fetch("php/handlerUpdatePost.php",{
+    fetch("updatePost",{
       method: "POST",
       body: formData
     }).then(response=>response.text())

@@ -8,6 +8,6 @@
     $msg = $_POST['msg'];
     
     $message = "Имя: $name\nФамилия: $lastname\nТелефон: $phone\nПочта: $email\nСообщение: $msg";
-   // mail("sash1122@yandex.ru","Письмо с сайта",$message);
-    echo ("success");
+    if (mail('alex_ko@mail.ru','Письмо с сайта',$message))  echo ("success");
+    else echo("error");
 ?>

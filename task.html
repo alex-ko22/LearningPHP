@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+      body{
+        margin:0;
+        padding:20px;
+      }
+      div[id$="box"]{
+        width:250px;
+        height:250px;
+      }
+      #red_box{background:red;}
+      #green_box{
+        background:green;
+        margin-left:auto;
+        position:relative;
+        top:-250px;
+      }
+      #blue_box{
+        background:blue;
+        position:absolute;
+        bottom:20px;
+      }
+      #yellow_box{
+        background:yellow;
+        margin-left:auto;
+        position:absolute;
+        bottom:20px;
+        right:20px;
+      }
+      .circle{
+        position:absolute;
+        width:100px;
+        height:100px;
+        border-radius:50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="red_box" class="box"></div>
+    <div id="green_box" class="box"></div>
+    <div id="blue_box" class="box"></div>
+    <div id="yellow_box" class="box"></div>
+    <script>
+      let colors = ['red','green','blue','yellow','black'];
+      for(let i=0; i<5; i++){
+        let div = document.createElement('div');
+        div.classList.add('circle');
+        div.onclick = function () {
+          this.hidden = true;
+          setTimeout(()=>this.hidden = false,200);
+        };
+        div.style.backgroundColor = colors[i];
+        const maxTop = (window.innerHeight-250);
+        const maxLeft = (window.innerWidth-250);
+        div.style.top = Math.random()*(maxTop-250)+250+"px";
+        div.style.left= Math.random()*(maxLeft-250)+250+"px";
+        document.body.append(div);
+      }
+
+      const circles = document.querySelectorAll('.circle');
+      for (let circle of circles){
+        circle.onmousedown = dragCircle;
+      }
+
+      function dragCircle(event) {
+        event.preventDefault(); 
+        const circle = this;
+        const circleCoords = circle.getBoundingClientRect();
+        const x = circleCoords.x;
+        const y = circleCoords.y;
+
+        circle.style.position = "absolute";
+    
+        let shiftX = event.clientX - circleCoords.left;
+        let shiftY = event.clientY - circleCoords.top;
+
+        circle.style.opacity = '0.5';
+
+        window.onmousemove = function(event) {
+            circle.style.top = event.clientY - shiftY + "px";
+            circle.style.left = event.clientX - shiftX + "px";
+        }
+
+        circle.onmouseup = function(event) {
+          window.onmousemove = null;
+          circle.onmouseup = null;
+          circle.hidden = true; 
+          const elementBelow = document.elementFromPoint(event.clientX, event.clientY); 
+          circle.hidden = false;
+          circle.style.opacity = '1';
+          
+          if ( elementBelow.classList.contains("box") && elementBelow.id.includes(circle.style.backgroundColor)) {
+                circle.style.backgroundColor = 'white';
+                setTimeout(() => circle.remove(),300);
+          }
+          else {
+                circle.style.left = x + "px";
+                circle.style.top = y + "px";
+          } 
+        }
+      }
+    </script>
+  </body>
+</html>
